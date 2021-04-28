@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Stack;
 
 public class EmployeePayrollService {
+    public  enum IOService{CONSOLE_TO, FILE_IO, REST_IO};
     public List<EmployeePayroll> employeePayrollList;
     public EmployeePayrollService() {
         this.employeePayrollList = new ArrayList<>();
