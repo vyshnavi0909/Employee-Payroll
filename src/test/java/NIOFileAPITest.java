@@ -22,8 +22,8 @@ public class NIOFileAPITest {
         Files.createDirectory(playPath);
         Assertions.assertTrue(Files.exists(playPath));
 
-        IntStream.range(1, 10).forEach(cntr -> {
-            Path tempFile = Paths.get(playPath + "/temp" + cntr);
+        IntStream.range(1, 10).forEach(counter -> {
+            Path tempFile = Paths.get(playPath + "/temp" + counter);
             Assertions.assertTrue(Files.notExists(tempFile));
             try {
                 Files.createFile(tempFile);

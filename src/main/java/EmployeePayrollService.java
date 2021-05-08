@@ -3,21 +3,41 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployeePayrollService {
-    public  enum IOService{CONSOLE_TO, FILE_IO, REST_IO};
-    public List<EmployeePayroll> employeePayrollList;
+
+    private List<EmployeePayroll> employeePayrollList;
+
     public EmployeePayrollService() {
-        this.employeePayrollList = new ArrayList<>();
+
     }
 
-    public static void main(String[] args) {
+    public EmployeePayrollService(List<EmployeePayroll> employeePayrollList) {
+        this.employeePayrollList = employeePayrollList;
+    }
 
+    public  enum IOService{
+        CONSOLE_IO, FILE_IO, DB_IO, REST_IO
+    }
+
+    public static void main(String[] args){
+        ArrayList<EmployeePayroll> employeePayrollList = new ArrayList<>();
         EmployeePayrollService employeePayrollService = new EmployeePayrollService();
         employeePayrollService.readingData();
-        employeePayrollService.writingData();
+        employeePayrollService.writingData(IOService.CONSOLE_IO);
     }
 
-    private void writingData() {
-        System.out.println(employeePayrollList);
+    public long countEntries(IOService fileIo) {
+        if(fileIo.equals(IOService.FILE_IO)){
+            return new EmployeePayrollFileIOService().countEntries();
+        }
+        return 0;
+    }
+
+    public void writingData(IOService fileIo){
+        if (fileIo.equals(IOService.CONSOLE_IO)){
+            System.out.println(employeePayrollList);
+        }else if (fileIo.equals(IOService.FILE_IO)){
+            new EmployeePayrollFileIOService().writeDataToFile(employeePayrollList);
+        }
     }
 
     private void readingData() {
@@ -27,7 +47,8 @@ public class EmployeePayrollService {
         System.out.println("Enter Employee Name: ");
         String name = input.next();
         System.out.println("Enter Employee Salary: ");
-        int salary = input.nextInt();
+        double salary = input.nextDouble();
+
         employeePayrollList.add(new EmployeePayroll(id, name, salary));
     }
 }
