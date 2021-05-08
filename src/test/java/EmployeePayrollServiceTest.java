@@ -14,9 +14,17 @@ public class EmployeePayrollServiceTest {
         EmployeePayrollService employeePayrollService = new EmployeePayrollService(Arrays.asList(arrayOfEmployees));
         employeePayrollService.writingData(EmployeePayrollService.IOService.FILE_IO);
         employeePayrollService.printData(EmployeePayrollService.IOService.FILE_IO);
-        long entries = employeePayrollService.countEntries(EmployeePayrollService.IOService.FILE_IO);
-        System.out.println("Number of entries in file are: " + entries);
+        long numOfEntries = employeePayrollService.countEntries(EmployeePayrollService.IOService.FILE_IO);
+        System.out.println("Number of entries in file are: " + numOfEntries);
 
-        Assertions.assertEquals(3, entries);
+        Assertions.assertEquals(3, numOfEntries);
+    }
+
+    @Test
+    public void givenFile_OnReadingFromFile_ShouldMatchEmployeeCount(){
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+        employeePayrollService.readDataFromFile(EmployeePayrollService.IOService.FILE_IO);
+        long numOfEntries = employeePayrollService.countEntries(EmployeePayrollService.IOService.FILE_IO);
+        Assertions.assertEquals(3, numOfEntries);
     }
 }

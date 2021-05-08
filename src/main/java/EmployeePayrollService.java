@@ -46,6 +46,12 @@ public class EmployeePayrollService {
         }
     }
 
+    public void readDataFromFile(IOService ioService){
+        if (ioService.equals(IOService.FILE_IO)){
+           new EmployeePayrollFileIOService().readDataFromFile();
+        }
+    }
+
     private void readingData() {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter Employee ID: ");
