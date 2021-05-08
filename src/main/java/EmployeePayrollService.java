@@ -32,6 +32,12 @@ public class EmployeePayrollService {
         return 0;
     }
 
+    public void printData(IOService ioService){
+        if (ioService.equals(IOService.FILE_IO)){
+            new EmployeePayrollFileIOService().printDataFromFile();
+        }
+    }
+
     public void writingData(IOService fileIo){
         if (fileIo.equals(IOService.CONSOLE_IO)){
             System.out.println(employeePayrollList);
